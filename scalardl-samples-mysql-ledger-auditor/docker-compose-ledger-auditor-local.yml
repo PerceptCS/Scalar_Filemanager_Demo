@@ -274,8 +274,8 @@ services:
     restart: on-failure:5  
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:8092/fileManagement/admin/checkHealth"]
-      interval: 20s
-      timeout: 5s
+      interval: 120s
+      timeout: 10s
       retries: 10
 
   scalar-bfd:
@@ -290,8 +290,8 @@ services:
     restart: on-failure:5     
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:8093/fileManagement_BFD/checkHealth"]
-      interval: 20s
-      timeout: 5s
+      interval: 60s
+      timeout: 10s
       retries: 10  
     
   scalar-ui:
