@@ -263,9 +263,7 @@ services:
     image: kanank/scalar_filemanager_local:latest
     container_name: "scalardl-filemanager"
     ports:
-      - "8092:8092"        
-    environment:
-      - SERVER_HOST=localhost  
+      - "8092:8092"         
     volumes:
       - ./scalar-container:/home/proj/scalar-container    
     networks:
