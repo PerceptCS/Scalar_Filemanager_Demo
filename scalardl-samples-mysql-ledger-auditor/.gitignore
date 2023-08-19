@@ -1,0 +1,11 @@
+.classpath
+.project
+.settings/
+.idea/
+*.iml
+*.iws
+bin/
+build/
+.gradle/
+
+!scalar-container/
