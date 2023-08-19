@@ -274,9 +274,9 @@ services:
     restart: on-failure:5  
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:8092/fileManagement/admin/checkHealth"]
-      interval: 120s
+      interval: 30s
       timeout: 10s
-      retries: 10
+      retries: 30
 
   scalar-bfd:
     image: kanank/scalar_bfd:latest
@@ -290,9 +290,9 @@ services:
     restart: on-failure:5     
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:8093/fileManagement_BFD/checkHealth"]
-      interval: 60s
+      interval: 30s
       timeout: 10s
-      retries: 10  
+      retries: 25 
     
   scalar-ui:
     image: kanank/fmui-local:latest
