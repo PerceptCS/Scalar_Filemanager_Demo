@@ -285,6 +285,8 @@ services:
       - scalar-filemanager
     ports:
       - "8093:8093"            
+    volumes:
+      - ./application_data:/home/proj/application_data     
     networks:
       - scalar-network-mysql
     restart: on-failure:5     
