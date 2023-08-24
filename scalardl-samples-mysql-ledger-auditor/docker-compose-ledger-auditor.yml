@@ -260,7 +260,7 @@ services:
       - scalar-network-mysql    
 
   scalar-filemanager:
-    image: kanank/scalar_filemanager_local_s3:latest
+    image: kanank/scalar_filemanager:latest
     container_name: "scalardl-filemanager"
     ports:
       - "8092:8092"         
@@ -271,7 +271,10 @@ services:
     depends_on:
       - ledger-envoy
       - auditor-envoy
-    restart: on-failure:5  
+    restart: on-failure:5 
+    environment:
+      - IS_ON_LOCAL_MACHINE=true
+      - STORAGE_PROVIDER_TYPE=LOCAL 
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:8092/fileManagement/admin/checkHealth"]
       interval: 30s
@@ -295,7 +298,7 @@ services:
       interval: 30s
       timeout: 10s
       retries: 25 
-    
+      
   scalar-ui:
     image: kanank/fmui-local:latest
     container_name: "fmui-local"
