@@ -259,6 +259,24 @@ services:
     networks:
       - scalar-network-mysql    
 
+
+# Application Configuration
+#  If STORAGE_PROVIDER_TYPE is set to AWS_S3, it indicates the use of Amazon S3 as the storage provider. Ensure the following parameters are configured:
+# - Set the AWS_BUCKET_NAME where the application will store data
+# - Provide the AWS_ACCESS_KEY and AWS_SECRET_KEY for authentication
+# Set IS_ON_LOCAL_MACHINE to false if deploying on a server like EC2, True if running on a local machine
+# Additonal Info
+# - STORAGE_PROVIDER_TYPE can be either= AWS_S3/LOCAL
+# - IS_ON_LOCAL_MACHINE can be either = true/false
+#   Email Configuration for Password Reset
+# - If you want to use your own personal or organization email for password reset functionality, set the following environment variables.
+# - By default, emails will be sent from percept.consulting.services.pune@gmail.com.
+# Add these environment variables for custom email configuration:
+#   - emailSenderServerLogin:Set this to your personal or organization email address
+#   - emailSenderServerPassword: Set this to the encrypted password for the specified email account
+# Example:
+#   - emailSenderServerLogin="your_personal_org_email@example.com"
+#   - emailSenderServerPassword="your_encrypted_email_password"
   scalar-filemanager:
     image: kanank/scalar_filemanager:latest
     container_name: "scalardl-filemanager"
@@ -275,6 +293,9 @@ services:
     environment:
       - IS_ON_LOCAL_MACHINE=true
       - STORAGE_PROVIDER_TYPE=LOCAL 
+      - AWS_BUCKET_NAME=sample-test-images
+      - AWS_ACCESS_KEY=AKIAZ2MBUPJYEIJUNP4D
+      - AWS_SECRET_KEY=tBxzaLJxUU7r63W1EPXaIM6dATAs/XkgA2RvlhK3
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:8092/fileManagement/admin/checkHealth"]
       interval: 30s
