@@ -293,8 +293,8 @@ services:
 
 # Application Configuration
 #  If STORAGE_PROVIDER_TYPE is set to AWS_S3, it indicates the use of Amazon S3 as the storage provider. Ensure the following parameters are configured:
-# - Set the AWS_BUCKET_NAME where the application will store data
-# - Provide the AWS_ACCESS_KEY and AWS_SECRET_KEY for authentication
+# Configure the AWS_BUCKET_NAME for storing data used by both the scalar-filemanager and scalar-bfd services.
+# Provide the AWS_ACCESS_KEY and AWS_SECRET_KEY for authentication, which will be used by both the scalar-filemanager and scalar-bfd services.
 # Set IS_ON_LOCAL_MACHINE to false if deploying on a server like EC2, True if running on a local machine
 # Additonal Info
 # - STORAGE_PROVIDER_TYPE can be either= AWS_S3/LOCAL
@@ -308,6 +308,7 @@ services:
 # Example:
 #   - emailSenderServerLogin="your_personal_org_email@example.com"
 #   - emailSenderServerPassword="your_encrypted_email_password"
+
   scalar-filemanager:
    image: kanank/scalar_filemanager:latest
    container_name: "scalardl-filemanager"
@@ -333,6 +334,9 @@ services:
      timeout: 10s
      retries: 30
 
+# If STORAGE_PROVIDER_TYPE is set to AWS_S3 in scalardl-filemanager, it indicates the use of Amazon S3 as the storage provider. Ensure the following parameters are configured:
+# Configure the AWS_BUCKET_NAME for storing data used by both the scalar-filemanager and scalar-bfd services.
+# Provide the AWS_ACCESS_KEY and AWS_SECRET_KEY for authentication, which will be used by both the scalar-filemanager and scalar-bfd services.
   scalar-bfd:
    image: kanank/scalar_bfd:latest
    container_name: "scalardl-bfd"
@@ -340,6 +344,10 @@ services:
      - scalar-filemanager
    ports:
      - "8093:8093"
+   environment:
+     - AWS_BUCKET_NAME=your-aws-s3-bucket-name-here
+     - AWS_ACCESS_KEY=your-access-key-here
+     - AWS_SECRET_KEY=your-secret-key-here
    volumes:
      - ./application_data:/home/proj/application_data
    networks:
