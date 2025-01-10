@@ -324,9 +324,9 @@ services:
    environment:
      - IS_ON_LOCAL_MACHINE=true
      - STORAGE_PROVIDER_TYPE=LOCAL
-     - AWS_BUCKET_NAME=sample-test-images
-     - AWS_ACCESS_KEY=AKIAZ2MBUPJYAABKZTRF
-     - AWS_SECRET_KEY=xIuoleMMqoOD5+RqvVGBoug2Bifcgm0wcM2u15QS
+     - AWS_BUCKET_NAME=your-aws-s3-bucket-name-here
+     - AWS_ACCESS_KEY=your-access-key-here
+     - AWS_SECRET_KEY=your-secret-key-here
    healthcheck:
      test: ["CMD", "curl", "-f", "http://localhost:8092/fileManagement/admin/checkHealth"]
      interval: 30s
